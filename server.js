@@ -6,8 +6,6 @@ import eventoRouter from './router/eventoRouter.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Middleware para permitir o uso de JSON no corpo da requisição
 app.use(express.json());
 
 // Conectar ao MongoDB Atlas
@@ -19,10 +17,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     console.error('Erro ao conectar ao MongoDB:', err);
   });
 
-// Usar o roteador de eventos
 app.use('/eventos', eventoRouter);
 
-// Rota de teste
 app.get('/', (req, res) => {
   res.send('Servidor rodando e banco de dados conectado!');
 });
