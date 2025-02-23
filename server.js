@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { fileURLToPath} from 'url'
+import { fileURLToPath } from 'url';
 import path from 'path';
 import eventoRouter from './router/eventoRouter.js';
 
@@ -18,16 +18,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Conectar ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('Conectado ao MongoDB');
+    console.log('Conectado ao MongoDB Atlas');
   })
   .catch((err) => {
-    console.error('Erro ao conectar ao MongoDB:', err);
+    console.error('Erro ao conectar ao MongoDB Atlas:', err);
   });
 
 app.use('/eventos', eventoRouter);
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(path.resolve(), 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 
