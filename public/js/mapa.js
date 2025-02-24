@@ -35,15 +35,16 @@ async function adicionarMarcadores() {
 }
 
 // Função para centralizar o mapa na localização do usuário
+let userCoords = null;
 function localizacaoAtual() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const { latitude, longitude } = position.coords;
+                userCoords = [position.coords.latitude, position.coords.longitude];
 
-                map.setView([latitude, longitude], 13);
+                map.setView([userCoords[0], userCoords[1]], 13);
 
-                L.marker([latitude, longitude])
+                L.marker([userCoords[0], userCoords[1]])
                     .addTo(map)
                     .bindPopup('Você está aqui!')
                     .openPopup();
@@ -58,9 +59,40 @@ function localizacaoAtual() {
     }
 }
 
+// Função para calcular a distância entre dois pontos (Fórmula de Haversine)
+function calcularDistancia(lat1, lon1, lat2, lon2) {
+    const R = 6371; 
+    
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distancia = R * c; 
+
+    return distancia.toFixed(2); 
+}
+
+
+// Função chamada ao clicar em "Ver Distância"
+function verDistancia(lat, lng) {
+    if (!userCoords) {
+        alert("Localização do usuário não encontrada. Ative a geolocalização.");
+        return;
+    }
+
+    const distancia = calcularDistancia(userCoords[0], userCoords[1], lat, lng);
+    alert(`A distância até o evento é de ${distancia} km.`);
+}
+
+
 // Chama as funções ao carregar a página
 window.onload = function () {
-    localizacaoAtual();
     inicializarMapa();
+    localizacaoAtual();
     adicionarMarcadores();
 };

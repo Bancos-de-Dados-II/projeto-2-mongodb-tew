@@ -51,9 +51,10 @@ async function listarEventos() {
                     <td>${evento.hora}</td>
                     <td>${evento.publico_alvo}</td>
                     <td class="actions">
-                        <button onclick="verNoMapa('${evento._id}')">Ver Local</button>
-                        <button onclick="abrirEditarEvento('${evento._id}')">Editar</button>
-                        <button onclick="excluirEvento('${evento._id}')">Excluir</button>
+                        <button class="map" onclick="verNoMapa('${evento._id}')">Ver Local</button>
+                        <button class="edit" onclick="abrirEditarEvento('${evento._id}')">Editar</button>
+                        <button class="delete" onclick="excluirEvento('${evento._id}')">Excluir</button>
+                        <button class="distancia" onclick="verDistancia(${evento.localizacao.coordinates[1]}, ${evento.localizacao.coordinates[0]})">Ver Distância</button>
                     </td>
                 `;
                 tabelaBody.appendChild(row);

@@ -87,6 +87,16 @@ th {
     color: white;
 }
 
+.actions button.map {
+    background-color: #007bff;
+    color: white;
+}
+
+.actions button.distancia {
+    background-color: #28a745;
+    color: white;
+}
+
 /* Modal */
 .modal {
     position: fixed;
