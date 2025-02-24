@@ -50,7 +50,6 @@ async function listarEventos() {
                     <td>${new Date(evento.data).toLocaleDateString()}</td>
                     <td>${evento.hora}</td>
                     <td>${evento.publico_alvo}</td>
-                    <td>Lat: ${evento.localizacao.coordinates[0]}, Lng: ${evento.localizacao.coordinates[1]}</td>
                     <td class="actions">
                         <button onclick="verNoMapa('${evento._id}')">Ver Local</button>
                         <button onclick="abrirEditarEvento('${evento._id}')">Editar</button>
