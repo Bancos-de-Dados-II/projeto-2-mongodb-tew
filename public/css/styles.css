@@ -49,6 +49,11 @@ header {
     color: white;
 }
 
+.button-container button.view-graficos {
+    background-color: #0baf94;
+    color: white;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
